@@ -1,0 +1,10 @@
+[package]
+name = "codev-capture"
+version = "0.1.0"
+edition = "2024"
+description = "Capture-neutral frame envelopes and bounded frame transport for CodeV"
+license = "Proprietary"
+publish = false
+
+[dependencies]
+thiserror = "2.0.17"

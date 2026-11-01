@@ -1,0 +1,30 @@
+[workspace]
+resolver = "3"
+members = [
+    "codev-obf",
+    "codev-protocol",
+    "codev-conceal",
+    "codev-capture",
+    "codev-proxy",
+    "codev-stream",
+    "codev-assets",
+    "codev-web",
+    "codev-session",
+    "codev-https",
+    "codev-cli",
+    "codev-mobile",
+    "codev-verify",
+    "phoenix-lan-relay",
+    "phoenix-cloud-relay",
+    "phoenix-windows",
+
+    "codev-decode",]
+exclude = ["codev-batch-sync"]
+
+# 发布加固：去符号、单编译单元、abort 掉 panic 解绑与格式化字符串，
+# 让二进制里不再残留可读的 panic 路径与模块名。
+[profile.release]
+lto = "fat"
+codegen-units = 1
+strip = "symbols"
+panic = "abort"

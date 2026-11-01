@@ -1,0 +1,4 @@
+module CodevMobile {
+    header "codev_mobile.h"
+    export *
+}

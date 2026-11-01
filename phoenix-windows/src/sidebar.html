@@ -1,0 +1,173 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{color-scheme:dark;--bg:#0a0508;--panel:#0c171e;--line:#19313c;--muted:#77909b;--text:#fff1ef;--cyan:#ff5a4d;--violet:#7469ff;--good:#ff8a3d;--warn:#ffb84d;--bad:#ff6b8f}
+  *{box-sizing:border-box}html,body{width:100%;max-width:100%;height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--text);font-family:"Segoe UI","Microsoft YaHei UI",sans-serif}
+  body:before{content:"";position:fixed;inset:0;background:radial-gradient(circle at 16% 0,#14364088 0,transparent 38%),linear-gradient(160deg,#0b161d 0,#0a0508 64%);pointer-events:none}
+  .shell{position:relative;width:100%;max-width:100%;height:100%;padding:20px 18px 16px;border-right:1px solid #1b333d;overflow-y:auto;overflow-x:hidden;scrollbar-width:none}.shell::-webkit-scrollbar{display:none}.full{width:100%;min-width:0;overflow:hidden}
+  .brand{display:flex;align-items:center;gap:12px;padding:2px 3px 20px}.logo{width:46px;height:46px;border-radius:14px;background:linear-gradient(145deg,#786bff,#4f67e7);box-shadow:0 9px 28px #645dff55;display:grid;place-items:center;flex:none}.logo svg{width:30px;height:30px}.brand-title{font-weight:750;font-size:18px;letter-spacing:.5px}.brand-sub{font-size:11px;color:#8ea0aa;margin-top:3px}
+  .collapse{margin-left:auto;width:32px;height:32px;border:1px solid var(--line);border-radius:10px;background:#0d1b22;color:#a8bdc4;cursor:pointer;font-size:18px}.collapse:hover{border-color:#3f6f7b;color:#fff}
+  .card{width:100%;min-width:0;background:linear-gradient(145deg,#0e1b23,#0a151c);border:1px solid var(--line);border-radius:17px;padding:15px;margin-bottom:12px;box-shadow:0 8px 25px #02080b44}
+  .card-title{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:650;margin-bottom:12px}.card-title .dot{width:8px;height:8px;border-radius:50%;background:var(--muted);box-shadow:0 0 14px currentColor}.dot.good{background:var(--good);color:var(--good)}.dot.wait{background:var(--warn);color:var(--warn)}.dot.bad{background:var(--bad);color:var(--bad)}
+  .status-main{font-size:17px;font-weight:720;margin-bottom:5px}.status-sub{font-size:11px;line-height:1.6;color:var(--muted)}
+  .modes{display:grid;gap:8px}.mode{display:grid;grid-template-columns:32px 1fr 11px;gap:9px;align-items:center;padding:9px 10px;border-radius:12px;background:#081219;border:1px solid #142832}.mode-icon{width:30px;height:30px;border-radius:9px;background:#10252c;color:var(--cyan);display:grid;place-items:center;font-size:15px}.mode b{font-size:12px;display:block}.mode small{font-size:10px;color:#718a94}.mode-led{width:7px;height:7px;border-radius:50%;background:#26434d}.ready .mode-led{background:var(--good);box-shadow:0 0 10px #ff8a3daa}
+  .node-top{display:flex;align-items:center;justify-content:space-between}.pill{font-size:10px;border:1px solid #245261;background:#0a242b;color:#61ded5;border-radius:999px;padding:4px 8px}.node-address{font-family:Consolas,monospace;font-size:15px;color:#fff1ef;margin:10px 0 3px;word-break:break-all}.node-meta{font-size:10px;color:var(--muted)}
+  .qr-wrap{margin:12px auto 8px;width:152px;height:152px;padding:9px;border-radius:14px;background:#fff1ef;display:grid;place-items:center}.qr-wrap svg{width:100%;height:100%}.hint{text-align:center;color:#b89a99;font-size:10px;line-height:1.5}
+  .actions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;margin-top:12px}.btn{min-width:0;border:1px solid #25404a;border-radius:11px;background:#101f27;color:#b89a99;padding:10px 6px;font-size:11px;cursor:pointer;white-space:nowrap}.btn:hover{border-color:#4a7580;background:#142a33}.btn.primary{border-color:#625cfa;background:linear-gradient(135deg,#6c62f5,#4e64e4);color:white}.btn.wide{grid-column:1/-1}
+  .footer{display:flex;gap:8px;justify-content:space-between;align-items:center;color:#57717b;font-size:9px;padding:3px 3px 0;white-space:nowrap}.secure{color:#57cdbc;font-size:8px}
+  /* 采集驱动失败提示：红底黄字，必须在界面上看得见（以前这种错误是静默丢掉的） */
+  .warn-banner{margin:0 0 12px;padding:10px 12px;border-radius:12px;border:1px solid #6b4a1d;background:#2a1f0d;color:#ffb84d;font-size:10.5px;line-height:1.6}
+  .btn.danger{border-color:#6b2b34;background:#22121a;color:#ff9db0}
+  .btn.danger:hover{border-color:#a33a48;background:#2b161e}
+  #login{position:fixed;inset:0;z-index:20;background:linear-gradient(160deg,#08151c,#050d12 72%);padding:28px 22px;display:none}.login-brand{display:flex;align-items:center;gap:12px;margin-bottom:42px}.login-card{border:1px solid #1a3540;background:#0c1921;border-radius:20px;padding:21px;box-shadow:0 20px 70px #0008}.login-card h2{margin:0 0 8px;font-size:20px}.login-card p{margin:0 0 18px;color:#7f98a2;font-size:11px;line-height:1.6}.input{width:100%;height:45px;border-radius:11px;border:1px solid #28434d;background:#071116;color:#fff;padding:0 13px;outline:none;font-size:14px;letter-spacing:.3px}.input:focus{border-color:#ff3b30;box-shadow:0 0 0 3px #ff3b301a}.activate{width:100%;height:44px;margin-top:10px;border:0;border-radius:11px;background:linear-gradient(135deg,#6d63f5,#3faaa9);color:#fff;font-weight:700;cursor:pointer}.activate:disabled{opacity:.55;cursor:wait}.login-error{min-height:18px;margin-top:10px;color:#ff6b8f;font-size:10px;line-height:1.5}.three{margin-top:19px;padding-top:15px;border-top:1px solid #182d36;color:#5f7a84;font-size:9px;line-height:1.8}
+  .compact{display:none}.collapsed .shell{padding:16px 10px;border-right-color:#274652}.collapsed .full{display:none!important}.collapsed .compact{display:flex;flex-direction:column;align-items:center;gap:14px}.compact .logo{width:43px;height:43px}.compact button{width:42px;height:42px;border-radius:13px;border:1px solid #24434e;background:#0e2028;color:#b89a99;cursor:pointer;font-size:17px}.compact .live{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 11px #ff8a3d}.collapsed #login{display:none!important}
+  #toast{position:fixed;left:50%;bottom:18px;transform:translate(-50%,18px);background:#172831;border:1px solid #31505b;color:#fff1ef;border-radius:10px;padding:8px 13px;font-size:10px;opacity:0;transition:.22s;pointer-events:none;z-index:40;white-space:nowrap}#toast.show{opacity:1;transform:translate(-50%,0)}
+</style>
+<style>
+  /* ===== 神明之眼 1.0 · 白色液态玻璃（覆盖上面的深色皮） ===== */
+  :root{color-scheme:light;--bg:#eef2f8;--panel:#ffffff;--line:rgba(20,23,37,.10);--muted:#6d7587;--text:#141725;--cyan:#2b3160;--violet:#7370f6;--good:#14a369;--warn:#d88c14;--bad:#e03b57}
+  html,body{background:var(--bg);color:var(--text)}
+  body:before{background:radial-gradient(circle at 14% 0,rgba(124,103,246,.30) 0,transparent 42%),radial-gradient(circle at 92% 98%,rgba(113,199,246,.30) 0,transparent 46%),linear-gradient(160deg,#ffffff 0,#eef2f8 64%)}
+  .shell{border-right:1px solid rgba(20,23,37,.08)}
+  .brand-title{color:var(--text);letter-spacing:.5px}
+  .brand-sub{color:var(--muted)}
+  .logo{background:linear-gradient(145deg,#2b3160,#7370f6);box-shadow:0 10px 26px rgba(43,49,96,.26)}
+  .collapse{border:1px solid rgba(20,23,37,.10);background:rgba(255,255,255,.78);color:#4b5566}
+  .collapse:hover{border-color:rgba(43,49,96,.38);color:#141725}
+  .card{background:linear-gradient(145deg,rgba(255,255,255,.95),rgba(255,255,255,.66));border:1px solid rgba(255,255,255,.95);box-shadow:0 12px 30px rgba(20,23,37,.10),inset 0 1px 0 rgba(255,255,255,.95);backdrop-filter:blur(18px) saturate(1.2)}
+  .card-title{color:#2b3160}
+  .status-main{color:var(--text)}
+  .status-sub{color:var(--muted)}
+  .mode{background:rgba(255,255,255,.62);border:1px solid rgba(20,23,37,.08)}
+  .mode-icon{background:rgba(43,49,96,.08);color:#2b3160}
+  .mode small{color:var(--muted)}
+  .mode-led{background:rgba(20,23,37,.18)}
+  .pill{border:1px solid rgba(43,49,96,.22);background:rgba(43,49,96,.06);color:#2b3160}
+  .node-address{color:var(--text)}
+  .node-meta{color:var(--muted)}
+  .qr-wrap{background:#fff;box-shadow:inset 0 0 0 1px rgba(20,23,37,.08)}
+  .hint{color:var(--muted)}
+  .btn{border:1px solid rgba(20,23,37,.12);background:rgba(255,255,255,.74);color:#3b4252}
+  .btn:hover{border-color:rgba(43,49,96,.35);background:rgba(255,255,255,.96)}
+  .btn.primary{border:0;background:linear-gradient(135deg,#2b3160,#7370f6);color:#fff;box-shadow:0 10px 22px rgba(43,49,96,.26)}
+  .btn.danger{border-color:rgba(224,59,87,.28);background:rgba(224,59,87,.08);color:#c02a45}
+  .btn.danger:hover{border-color:rgba(224,59,87,.5);background:rgba(224,59,87,.14)}
+  .footer{color:var(--muted)}
+  .secure{color:var(--good)}
+  .warn-banner{border:1px solid rgba(216,140,20,.35);background:rgba(216,140,20,.10);color:#9a6407}
+  #toast{background:rgba(43,49,96,.92);border:1px solid rgba(255,255,255,.28);color:#fff}
+  .compact button{border:1px solid rgba(20,23,37,.12);background:rgba(255,255,255,.82);color:#3b4252}
+  .capture-path{font-family:Consolas,ui-monospace,monospace;font-size:11px;color:#2b3160;word-break:break-all;background:rgba(43,49,96,.06);border:1px solid rgba(43,49,96,.12);border-radius:10px;padding:8px 10px;line-height:1.55}
+</style>
+
+</head>
+<body>
+<main class="shell">
+  <section class="full">
+    <div class="brand">
+      <div class="logo"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="10" stroke="white" stroke-width="2" opacity=".9"/><path d="M16 4v4M28 16h-4M16 28v-4M4 16h4" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M16 16 23 9" stroke="#ff5a4d" stroke-width="2.6" stroke-linecap="round"/><circle cx="16" cy="16" r="2.5" fill="#ff5a4d"/></svg></div>
+      <div><div class="brand-title">神明之眼</div><div id="brandSub" class="brand-sub">本机雷达 · 1.0</div></div>
+      <button class="collapse" onclick="send('collapse')" title="收起侧栏">‹</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span id="statusDot" class="dot wait"></span>接收引擎</div>
+      <div id="statusMain" class="status-main">正在验证授权…</div>
+      <div id="statusSub" class="status-sub">安全验证完成后自动启动</div>
+    </div>
+    <div id="captureWarn" class="warn-banner" style="display:none"></div>
+
+    <div class="card">
+      <div class="card-title"><span style="color:var(--cyan)">◫</span> 三合一接收</div>
+      <div id="modes" class="modes">
+        <div class="mode"><span class="mode-icon">PC</span><span><b>Windows 端游采集</b><small>直接启动，无需代理</small></span><i class="mode-led"></i></div>
+        <div class="mode"><span class="mode-icon">⌁</span><span><b>手机连接电脑热点</b><small>共享热点，无需 VPN</small></span><i class="mode-led"></i></div>
+        <div class="mode"><span class="mode-icon">S5</span><span><b>局域网 SOCKS5</b><small id="clientLabel">UDP 转发 · 0 台设备</small></span><i class="mode-led"></i></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="node-top"><div class="card-title" style="margin:0"><span style="color:var(--cyan)">⌁</span> 手机游戏节点</div><span class="pill">TCP + UDP</span></div>
+      <div id="nodeAddress" class="node-address">等待接收引擎启动</div>
+      <div id="nodeMeta" class="node-meta">用户 phoenix-local · 端口 2025</div>
+      <div id="qrWrap" class="qr-wrap" style="display:none"></div>
+      <div id="qrHint" class="hint">启动后可用 Shadowrocket 扫码添加</div>
+      <div class="actions">
+        <button class="btn primary" onclick="copyNode()">复制节点</button>
+        <button class="btn" onclick="send('reconnect')">重新连接</button>
+        <button class="btn wide" onclick="send('open-browser')">在浏览器打开雷达 ↗</button>
+        <button class="btn wide danger" onclick="forget()">重置本机状态</button>
+      </div>
+    </div>
+
+    <div class="card">
+<div class="card-title"><span style="color:var(--cyan)">◉</span> 抓包（反馈 / 取证）</div>
+<div id="capturePath" class="capture-path">启动后显示抓包目录</div>
+<div class="hint" style="text-align:left;margin-top:8px">每局对战自动录制一份 <b>capture.pcap</b>：Wireshark 能直接打开，出问题把整个文件夹压缩发客服即可。</div>
+<div class="actions">
+<button class="btn primary wide" onclick="send('open-captures')">打开抓包文件夹</button>
+<button class="btn wide" onclick="copyCaptures()">复制文件夹路径</button>
+</div>
+</div>
+<div class="footer"><span id="buildLabel">版本信息加载中</span><span id="secureLabel" class="secure">模式加载中</span></div>
+  </section>
+
+  <section class="compact">
+    <div class="logo"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="10" stroke="white" stroke-width="2"/><path d="M16 16 23 9" stroke="#ff5a4d" stroke-width="2.6" stroke-linecap="round"/><circle cx="16" cy="16" r="2.5" fill="#ff5a4d"/></svg></div>
+    <span class="live"></span>
+    <button onclick="send('open-browser')" title="浏览器打开雷达">↗</button>
+    <button onclick="send('reconnect')" title="重新连接">↻</button>
+    <button onclick="send('expand')" title="展开侧栏">›</button>
+  </section>
+</main>
+
+<section id="login">
+  <div class="login-brand"><div class="logo"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="10" stroke="white" stroke-width="2"/><path d="M16 16 23 9" stroke="#ff5a4d" stroke-width="2.6" stroke-linecap="round"/><circle cx="16" cy="16" r="2.5" fill="#ff5a4d"/></svg></div><div><div class="brand-title">神明之眼</div><div class="brand-sub">本机雷达</div></div></div>
+  <div class="login-card"><h2>验证授权</h2><p>输入卡密完成安全验证。</p><input id="cardInput" class="input" autocomplete="off" spellcheck="false" placeholder="请输入卡密"><button id="activateBtn" class="activate" onclick="activate()">开始验证</button><div id="loginError" class="login-error"></div><div class="three">验证通过后自动启动接收服务。<br>授权凭据安全保存。</div></div>
+</section>
+<div id="toast"></div>
+<script>
+  let state={phase:'boot',nodeUri:'',qrSvg:'',clients:0};
+  const $=id=>document.getElementById(id);
+  function post(payload){window.ipc.postMessage(JSON.stringify(payload))}
+  function send(action){post({action})}
+  function activate(){if($('activateBtn').disabled||state.phase==='activating'||state.phase==='starting')return;const card=$('cardInput').value.trim();if(!card){$('loginError').textContent='请输入卡密';return}$('activateBtn').disabled=true;$('activateBtn').textContent='正在验证…';$('loginError').textContent='';post({action:'activate',card})}
+  function forget(){if(!confirm('重置会清掉本机保存的引擎状态（不影响已录的抓包文件）。确定继续？'))return;send('forget')}
+  function copyCaptures(){if(!state.captureDir){toast("启动后再复制路径");return}navigator.clipboard.writeText(state.captureDir).then(()=>toast("路径已复制")).catch(()=>post({action:"copy-captures"}))}
+  function toast(text){$('toast').textContent=text;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1700)}
+  async function copyNode(){if(state.phase!=='ready'||!state.nodeUri){toast('节点尚未启动');return}try{await navigator.clipboard.writeText(state.nodeUri);toast('节点已复制')}catch(_){post({action:'copy-node'})}}
+  function render(){
+    $('brandSub').textContent='本机雷达 · 1.0';
+    $('secureLabel').textContent=state.serverMode?'● 云端解析':'● 本地解析';
+    const ready=state.phase==='ready', license=state.phase==='license', serviceError=state.phase==='service-error';
+    $('login').style.display=license?'block':'none';
+    $('statusDot').className='dot '+(ready?'good':(license||serviceError)?'bad':'wait');
+    $('statusMain').textContent=ready?'实时接收已启动':license?'等待有效授权':serviceError?'接收服务异常':'正在启动安全服务…';
+    $('statusSub').textContent=ready?(state.status||'云端解密 · 采集与 SOCKS5 已就绪'):(state.message||'正在执行安全验证');
+    $('modes').classList.toggle('ready',ready&&!state.captureError);
+    [...$('modes').children].forEach((mode,i)=>{mode.querySelector('.mode-led').style.background=ready&&(!state.captureError||i===2)?'var(--cyan)':''});
+    $('nodeAddress').textContent=ready?(state.address||'节点地址检测中…'):'等待接收引擎启动';
+    $('clientLabel').textContent='UDP 转发 · '+(state.clients||0)+' 台设备';
+    if(ready&&state.qrSvg){$('qrWrap').innerHTML=state.qrSvg;$('qrWrap').style.display='grid';$('qrHint').textContent='Shadowrocket 扫码添加 · 必须开启 UDP 转发'}
+    else{$('qrWrap').innerHTML='';$('qrWrap').style.display='none';$('qrHint').textContent='启动后可用 Shadowrocket 扫码添加'}
+    if(license){$('loginError').textContent=state.message||'';$('activateBtn').disabled=false;$('activateBtn').textContent='重新验证'}
+    // 抓包驱动没起来：必须在界面上说清楚，否则客户只会看到"没数据"（以前是静默的）。
+    const warn=$('captureWarn');
+    if(ready&&state.captureError){warn.style.display='block';warn.textContent='⚠ 采集驱动未启动：'+state.captureError+'　→ 请检查管理员权限、驱动加载错误及系统策略，然后点「重新连接」。';}
+    else if(ready&&state.storageWarning){warn.style.display='block';warn.textContent=state.storageWarning;}
+    else{warn.style.display='none';}
+    $('nodeMeta').textContent=ready?(state.nodeMeta||''):'节点尚未启动';
+    $('capturePath').textContent=state.captureDir||'启动后显示抓包目录';
+    if(state.build){$('buildLabel').textContent='v'+(state.version||'')+' · 构建 '+state.build+(state.expiresAt?(' · 到期 '+state.expiresAt):'')}
+  }
+  window.phoenixUpdate=function(next){if(next.clearCard)$('cardInput').value='';if(next.phase==='license'||next.phase==='service-error'){state=Object.assign(state,{nodeUri:'',qrSvg:'',nodeMeta:'',clients:0,captureError:null,storageWarning:null});}state=Object.assign(state,next);render()};
+  window.phoenixSetCollapsed=function(value){document.body.classList.toggle('collapsed',!!value)};
+  window.phoenixToast=toast;
+  window.addEventListener('keydown',e=>{if(e.key==='Enter'&&$('login').style.display==='block')activate()});
+  window.phoenixUpdate(__BOOT__);
+</script>
+</body>
+</html>

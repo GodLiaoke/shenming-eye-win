@@ -1,0 +1,458 @@
+{
+ "schema_version": 1,
+ "maps": [
+  {
+   "build_id": "1.24.0.2911",
+   "pak_sha256": "7e1c74124a0ebf1e2ac696eb7c9287787ac0311a5660a22cd2f3c095c2ab55db",
+   "map_id": 1,
+   "name": "Ascent",
+   "object_path": "/Game/Maps/AscentRE/Levels/MAP_AscentRE_Main",
+   "level_center": {
+    "x": 1084.0,
+    "y": -4504.0
+   },
+   "level_size": {
+    "x": 14300.0,
+    "y": 14300.0
+   },
+   "default_rotation_degrees": 90.0,
+   "image_rotation_degrees": 180.0,
+   "background_rotation_degrees": null,
+   "texture_path": "map-1-ascent.png",
+   "texture_width": 512,
+   "texture_height": 512,
+   "texture_sha256": "0ddab48da8d1a6a68839e7f1bea3c4eee8ebe852b6e765975bf3f0352d64c875",
+   "source_pak": "peer-maps",
+   "source_texture_path": "peer/assets/maps/UI_MiniMap_Image_Ascent.png",
+   "source_texture_sha256": "b8079ce0a533a6388b2659f6ed9d170cea730c31b8969c1acf993018772f2606",
+   "build_binding": "unverified",
+   "build_binding_evidence": {
+    "exact": false,
+    "present": true,
+    "package_id": "base_1.24.0.2911_app",
+    "status": "not_listed_in_puffer_manifest"
+   },
+   "orientation_verified": true,
+   "blockers": [
+    "exact_build_binding_unverified",
+    "per_map_authorized_pcap_landmark_orientation_validation_missing"
+   ],
+   "status": "candidate"
+  },
+  {
+   "build_id": "1.24.0.2911",
+   "pak_sha256": "6fdd1c5c085282445079f9eac5881c3cbac8f8872584f0a76ad8e7e036a9718e",
+   "map_id": 2,
+   "name": "Bind",
+   "object_path": "/Game/Maps/BI/Levels/MAP_BI_Main",
+   "level_center": {
+    "x": 8139.0,
+    "y": -814.0
+   },
+   "level_size": {
+    "x": 16800.0,
+    "y": 16800.0
+   },
+   "default_rotation_degrees": 90.0,
+   "image_rotation_degrees": -90.0,
+   "background_rotation_degrees": null,
+   "texture_path": "map-2-bind.png",
+   "texture_width": 512,
+   "texture_height": 512,
+   "texture_sha256": "5bc71fdadf53d199f0652e8b22c7e8e71e6c26034cf51d3ee6e354d2a0c87d5c",
+   "source_pak": "peer-maps",
+   "source_texture_path": "peer/assets/maps/UI_MiniMap_Image_Bind.png",
+   "source_texture_sha256": "fab6c4c39a0dc8017a4ea0377dd09ebcf8471472fa33814dc87a73fb57425afb",
+   "build_binding": "unverified",
+   "build_binding_evidence": {
+    "exact": false,
+    "present": true,
+    "package_id": "87ba29fd1c017e88e67d5422e597",
+    "status": "fingerprint_mismatch"
+   },
+   "orientation_verified": true,
+   "blockers": [
+    "exact_build_binding_unverified",
+    "per_map_authorized_pcap_landmark_orientation_validation_missing",
+    "puffer_package_fingerprint_mismatch_requires_exact_build_binding"
+   ],
+   "status": "candidate"
+  },
+  {
+   "build_id": "1.24.0.2911",
+   "pak_sha256": "6fdd1c5c085282445079f9eac5881c3cbac8f8872584f0a76ad8e7e036a9718e",
+   "map_id": 1003,
+   "name": "Icebox",
+   "object_path": "/Game/Maps/IceBox/Levels/MAP_IceBox_Main",
+   "level_center": {
+    "x": -2490.0,
+    "y": 970.0
+   },
+   "level_size": {
+    "x": 14200.0,
+    "y": 14200.0
+   },
+   "default_rotation_degrees": 90.0,
+   "image_rotation_degrees": 0.0,
+   "background_rotation_degrees": null,
+   "texture_path": "map-1003-icebox.png",
+   "texture_width": 512,
+   "texture_height": 512,
+   "texture_sha256": "24e0c1d196b60b62feb352b193e750542a5a7648db8450b5142fe2f09c771948",
+   "source_pak": "peer-maps",
+   "source_texture_path": "peer/assets/maps/UI_MiniMap_Image_Icebox.png",
+   "source_texture_sha256": "319ff70291dcdb1564fc3306e41373a987ef22c44e159538f9084597874b0fd0",
+   "build_binding": "unverified",
+   "build_binding_evidence": {
+    "exact": false,
+    "present": true,
+    "package_id": "87ba29fd1c017e88e67d5422e597",
+    "status": "fingerprint_mismatch"
+   },
+   "orientation_verified": true,
+   "blockers": [
+    "exact_build_binding_unverified",
+    "per_map_authorized_pcap_landmark_orientation_validation_missing",
+    "puffer_package_fingerprint_mismatch_requires_exact_build_binding"
+   ],
+   "status": "candidate"
+  },
+  {
+   "build_id": "1.24.0.2911",
+   "pak_sha256": "7e1c74124a0ebf1e2ac696eb7c9287787ac0311a5660a22cd2f3c095c2ab55db",
+   "map_id": 1004,
+   "name": "Haven",
+   "object_path": "/Game/Maps/Haven/Levels/MAP_Haven_Main",
+   "level_center": {
+    "x": 1823.9,
+    "y": -8010.9
+   },
+   "level_size": {
+    "x": 12919.0,
+    "y": 13097.0
+   },
+   "default_rotation_degrees": 90.0,
+   "image_rotation_degrees": 180.0,
+   "background_rotation_degrees": null,
+   "texture_path": "map-1004-haven.png",
+   "texture_width": 512,
+   "texture_height": 512,
+   "texture_sha256": "aa7d70347ac05c41bf598b9d26893fbc70fe1ec80b29ed5da3e390844b362e7c",
+   "source_pak": "peer-maps",
+   "source_texture_path": "peer/assets/maps/UI_MiniMap_Image_Haven.png",
+   "source_texture_sha256": "b08fd37456ec66d8533f5450e9717a1054931495ab46665b99d353907cca79ad",
+   "build_binding": "unverified",
+   "build_binding_evidence": {
+    "exact": false,
+    "present": true,
+    "package_id": "base_1.24.0.2911_app",
+    "status": "not_listed_in_puffer_manifest"
+   },
+   "orientation_verified": true,
+   "blockers": [
+    "exact_build_binding_unverified",
+    "per_map_authorized_pcap_landmark_orientation_validation_missing"
+   ],
+   "status": "candidate"
+  },
+  {
+   "build_id": "1.24.0.2911",
+   "map_id": 1005,
+   "name": "Split",
+   "object_path": "/Game/Maps/Split/Levels/MAP_Split_Main",
+   "level_center": {
+    "x": 2370.0,
+    "y": -4516.0
+   },
+   "level_size": {
+    "x": 13200.0,
+    "y": 13200.0
+   },
+   "default_rotation_degrees": 90.0,
+   "image_rotation_degrees": 0.0,
+   "background_rotation_degrees": null,
+   "texture_path": "map-1005-split.png",
+   "texture_width": 512,
+   "texture_height": 512,
+   "texture_sha256": "5cd968885aeeb6eef4cf896ca174f869d5f4de71768ec2a1a293963d0bcc6238",
+   "source_pak": "peer-maps",
+   "source_texture_path": "peer/assets/maps/UI_MiniMap_Image_Split.png",
+   "source_texture_sha256": "a2b95948eeeb14b73027a94e442047d7c67f54e9a6be37572af5bbb6c9c5a5ad",
+   "build_binding": "unverified",
+   "pak_sha256": "7e1c74124a0ebf1e2ac696eb7c9287787ac0311a5660a22cd2f3c095c2ab55db",
+   "build_binding_evidence": {
+    "exact": false,
+    "present": true,
+    "package_id": "base_1.24.0.2911_app",
+    "status": "not_listed"
+   },
+   "orientation_verified": false,
+   "blockers": [
+    "orientation_unverified_needs_one_pcap"
+   ],
+   "status": "candidate"
+  },
+  {
+   "build_id": "1.24.0.2911",
+   "map_id": 1006,
+   "name": "Breeze",
+   "object_path": "/Game/Maps/Breeze/Levels/MAP_Breeze_Main",
+   "level_center": {
+    "x": 4910.0,
+    "y": 490.0
+   },
+   "level_size": {
+    "x": 14050.0,
+    "y": 14050.0
+   },
+   "default_rotation_degrees": 90.0,
+   "image_rotation_degrees": 0.0,
+   "background_rotation_degrees": null,
+   "texture_path": "map-1006-breeze.png",
+   "texture_width": 512,
+   "texture_height": 512,
+   "texture_sha256": "11da4776c8f81487c18745d75cbfa8c1a2a2e411ed75f1f527237bad47423b3f",
+   "source_pak": "peer-maps",
+   "source_texture_path": "peer/assets/maps/UI_MiniMap_Image_Breeze.png",
+   "source_texture_sha256": "e02b43e9ea1b243b9ae22ce1a91193b2b2261832e81f01864a5403c719aaa35d",
+   "build_binding": "unverified",
+   "pak_sha256": "7e1c74124a0ebf1e2ac696eb7c9287787ac0311a5660a22cd2f3c095c2ab55db",
+   "build_binding_evidence": {
+    "exact": false,
+    "present": true,
+    "package_id": "base_1.24.0.2911_app",
+    "status": "not_listed"
+   },
+   "orientation_verified": false,
+   "blockers": [
+    "orientation_unverified_needs_one_pcap"
+   ],
+   "status": "candidate"
+  },
+  {
+   "build_id": "1.24.0.2911",
+   "map_id": 1007,
+   "name": "Fracture",
+   "object_path": "/Game/Maps/Fracture/Levels/MAP_Fracture_Main",
+   "level_center": {
+    "x": 8479.0,
+    "y": -1093.0
+   },
+   "level_size": {
+    "x": 12100.0,
+    "y": 12100.0
+   },
+   "default_rotation_degrees": 90.0,
+   "image_rotation_degrees": 0.0,
+   "background_rotation_degrees": null,
+   "texture_path": "map-1007-fracture.png",
+   "texture_width": 512,
+   "texture_height": 512,
+   "texture_sha256": "c731b28129b283d2c4973fcb38a1a405f4532c5e1ace6267a67ced4272d85bd6",
+   "source_pak": "peer-maps",
+   "source_texture_path": "peer/assets/maps/UI_MiniMap_Image_Fracture.png",
+   "source_texture_sha256": "260886b0b489266dcc1cae7579ed67b7889515a512c34f3d6bf5893563748137",
+   "build_binding": "unverified",
+   "pak_sha256": "7e1c74124a0ebf1e2ac696eb7c9287787ac0311a5660a22cd2f3c095c2ab55db",
+   "build_binding_evidence": {
+    "exact": false,
+    "present": true,
+    "package_id": "base_1.24.0.2911_app",
+    "status": "not_listed"
+   },
+   "orientation_verified": false,
+   "blockers": [
+    "orientation_unverified_needs_one_pcap"
+   ],
+   "status": "candidate"
+  },
+  {
+   "build_id": "1.24.0.2911",
+   "pak_sha256": "6fdd1c5c085282445079f9eac5881c3cbac8f8872584f0a76ad8e7e036a9718e",
+   "map_id": 1009,
+   "name": "Pearl",
+   "object_path": "/Game/Maps/Pearl/Levels/MAP_Pearl_Main",
+   "level_center": {
+    "x": 5299.0,
+    "y": 239.0
+   },
+   "level_size": {
+    "x": 13300.0,
+    "y": 13300.0
+   },
+   "default_rotation_degrees": 90.0,
+   "image_rotation_degrees": -90.0,
+   "background_rotation_degrees": null,
+   "texture_path": "map-1009-pearl.png",
+   "texture_width": 512,
+   "texture_height": 512,
+   "texture_sha256": "7ee4206fcf9ec574c24f4f60469523ba7922df17c4ef911953ff5a1caee35217",
+   "source_pak": "peer-maps",
+   "source_texture_path": "peer/assets/maps/UI_MiniMap_Image_Pearl.png",
+   "source_texture_sha256": "3ec28bb513407f6e33969796c9bd7262756307b91b2484c94f81e4e82cda74de",
+   "build_binding": "unverified",
+   "build_binding_evidence": {
+    "exact": false,
+    "present": true,
+    "package_id": "87ba29fd1c017e88e67d5422e597",
+    "status": "fingerprint_mismatch"
+   },
+   "orientation_verified": true,
+   "blockers": [
+    "exact_build_binding_unverified",
+    "per_map_authorized_pcap_landmark_orientation_validation_missing",
+    "puffer_package_fingerprint_mismatch_requires_exact_build_binding"
+   ],
+   "status": "candidate"
+  },
+  {
+   "build_id": "1.24.0.2911",
+   "pak_sha256": "6fdd1c5c085282445079f9eac5881c3cbac8f8872584f0a76ad8e7e036a9718e",
+   "map_id": 1010,
+   "name": "Lotus",
+   "object_path": "/Game/Maps/Lotus/Levels/MAP_Lotus_Main",
+   "level_center": {
+    "x": 5662.0,
+    "y": 525.0
+   },
+   "level_size": {
+    "x": 12700.0,
+    "y": 12700.0
+   },
+   "default_rotation_degrees": 90.0,
+   "image_rotation_degrees": -90.0,
+   "background_rotation_degrees": null,
+   "texture_path": "map-1010-lotus.png",
+   "texture_width": 512,
+   "texture_height": 512,
+   "texture_sha256": "addb995e468e82dc1ed443e06dfd29bbb07f50ab6467fbba50829853dabe345d",
+   "source_pak": "peer-maps",
+   "source_texture_path": "peer/assets/maps/UI_MiniMap_Image_Lotus.png",
+   "source_texture_sha256": "7b235bf24977cb97043ce4b3bb9d7b8698a036c414eee2b0e5316b13cd45aaf4",
+   "build_binding": "unverified",
+   "build_binding_evidence": {
+    "exact": false,
+    "present": true,
+    "package_id": "87ba29fd1c017e88e67d5422e597",
+    "status": "fingerprint_mismatch"
+   },
+   "orientation_verified": true,
+   "blockers": [
+    "exact_build_binding_unverified",
+    "per_map_authorized_pcap_landmark_orientation_validation_missing",
+    "puffer_package_fingerprint_mismatch_requires_exact_build_binding"
+   ],
+   "status": "candidate"
+  },
+  {
+   "build_id": "1.24.0.2911",
+   "pak_sha256": "6fdd1c5c085282445079f9eac5881c3cbac8f8872584f0a76ad8e7e036a9718e",
+   "map_id": 1011,
+   "name": "Sunset",
+   "object_path": "/Game/Maps/Sunset/Levels/MAP_Sunset_Main",
+   "level_center": {
+    "x": 219.0,
+    "y": 108.0
+   },
+   "level_size": {
+    "x": 13160.0,
+    "y": 13160.0
+   },
+   "default_rotation_degrees": 90.0,
+   "image_rotation_degrees": -90.0,
+   "background_rotation_degrees": null,
+   "texture_path": "map-1011-sunset.png",
+   "texture_width": 512,
+   "texture_height": 512,
+   "texture_sha256": "8cff30300304b01ef59437b2d443f321a702ef1bdafa45df59118ac747e94d14",
+   "source_pak": "peer-maps",
+   "source_texture_path": "peer/assets/maps/UI_MiniMap_Image_Sunset.png",
+   "source_texture_sha256": "7473487c5a2159f7214c6ba04b07b0f6352f385c5bf10a0eb1e66856332ef9d6",
+   "build_binding": "unverified",
+   "build_binding_evidence": {
+    "exact": false,
+    "present": true,
+    "package_id": "87ba29fd1c017e88e67d5422e597",
+    "status": "fingerprint_mismatch"
+   },
+   "orientation_verified": true,
+   "blockers": [
+    "exact_build_binding_unverified",
+    "per_map_authorized_pcap_landmark_orientation_validation_missing",
+    "puffer_package_fingerprint_mismatch_requires_exact_build_binding"
+   ],
+   "status": "candidate"
+  },
+  {
+   "build_id": "1.24.0.2911",
+   "pak_sha256": "6fdd1c5c085282445079f9eac5881c3cbac8f8872584f0a76ad8e7e036a9718e",
+   "map_id": 1012,
+   "name": "Abyss",
+   "object_path": "/Game/Maps/Abyss/Levels/MAP_Abyss_Main",
+   "level_center": {
+    "x": 30.1,
+    "y": 15.0
+   },
+   "level_size": {
+    "x": 12650.0,
+    "y": 12620.0
+   },
+   "default_rotation_degrees": 90.0,
+   "image_rotation_degrees": 180.0,
+   "background_rotation_degrees": null,
+   "texture_path": "map-1012-abyss.png",
+   "texture_width": 512,
+   "texture_height": 512,
+   "texture_sha256": "1084de2411bc0677930d0faabafc660a31d2cfe6e007ca951080787942f26f97",
+   "source_pak": "peer-maps",
+   "source_texture_path": "peer/assets/maps/UI_MiniMap_Image_Abyss.png",
+   "source_texture_sha256": "f5b6379410eb6b048eda1542f019908f112894a4856e391669d9e0776c757140",
+   "build_binding": "unverified",
+   "build_binding_evidence": {
+    "exact": false,
+    "present": true,
+    "package_id": "87ba29fd1c017e88e67d5422e597",
+    "status": "fingerprint_mismatch"
+   },
+   "orientation_verified": true,
+   "blockers": [
+    "exact_build_binding_unverified",
+    "per_map_authorized_pcap_landmark_orientation_validation_missing",
+    "puffer_package_fingerprint_mismatch_requires_exact_build_binding"
+   ],
+   "status": "candidate"
+  },
+  {
+   "build_id": "1.24.0.2911",
+   "pak_sha256": "",
+   "map_id": 1013,
+   "name": "天枢云阙",
+   "object_path": "/Game/Maps/Plummet/levels/MAP_Plummet_Main",
+   "level_center": {
+    "x": 6397.0,
+    "y": 6244.0
+   },
+   "level_size": {
+    "x": 13500.0,
+    "y": 13500.0
+   },
+   "default_rotation_degrees": 90.0,
+   "image_rotation_degrees": -90.0,
+   "background_rotation_degrees": null,
+   "texture_path": "map-1013-tianshu-yunque.png",
+   "texture_width": 512,
+   "texture_height": 512,
+   "texture_sha256": "be4abaf213e04fc06fe361527148da807445984669a4b4af410528b7c6430bc7",
+   "source_pak": "peer-maps",
+   "source_texture_path": "peer/assets/maps/UI_MiniMap_Image_Plummet.png",
+   "source_texture_sha256": "0d8fbf5eaf279e16e93eee6e6b26299ecd8cf2dbb6d454de3dc4faf97882040b",
+   "build_binding": "unverified",
+   "build_binding_evidence": null,
+   "orientation_verified": true,
+   "blockers": [
+    "exact_build_binding_unverified"
+   ],
+   "status": "candidate"
+  }
+ ]
+}

@@ -1,0 +1,32 @@
+[package]
+name = "codev-stream"
+version = "0.1.0"
+edition = "2024"
+description = "Bounded capture and session state for the CodeV coordinate decoder"
+license = "Proprietary"
+publish = false
+
+[features]
+default = ["live-capture"]
+live-capture = ["dep:pcap"]
+
+[dependencies]
+aes = "0.8.4"
+cbc = { version = "0.1.2", features = ["alloc", "block-padding"] }
+chacha20 = "0.9.1"
+codev-conceal = { path = "../codev-conceal" }
+codev-protocol = { path = "../codev-protocol" }
+pcap = { version = "2.3.0", optional = true }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
+sha2 = "0.10.9"
+thiserror = "2.0.17"
+zeroize = { version = "1.8.2", features = ["derive"] }
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61.2", features = [
+    "Win32_Foundation",
+    "Win32_Security",
+    "Win32_Security_Authorization",
+    "Win32_System_Threading",
+] }

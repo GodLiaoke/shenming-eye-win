@@ -1,0 +1,13 @@
+[package]
+name = "phoenix-cloud-relay"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+name = "phoenix_cloud_relay"
+crate-type = ["staticlib", "rlib"]
+
+[dependencies]
+codev-obf = { path = "../codev-obf" }
+codev-conceal = { path = "../codev-conceal" }
+

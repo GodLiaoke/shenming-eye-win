@@ -1,0 +1,12 @@
+[package]
+name = "phoenix-lan-relay"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+name = "phoenix_lan_relay"
+crate-type = ["staticlib", "rlib"]
+
+[dependencies]
+codev-stream = { path = "../codev-stream", default-features = false }
+zeroize = "1.8.2"

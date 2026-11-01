@@ -1,0 +1,8 @@
+[package]
+name = "codev-obf"
+version = "0.1.0"
+edition = "2021"
+description = "编译期字符串混淆：二进制里不残留可读诊断词表，运行时输出与原文逐字一致。"
+publish = false
+
+[dependencies]

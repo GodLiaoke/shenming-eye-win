@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "builds": [
+    {
+      "build_id": "1.24.0.2911",
+      "codev_binary_sha256": "f23d77908127e627bc4c55cca39208ab6899f86ff1a7beea3bc2e0f797c03357",
+      "base_pak_sha256": "7e1c74124a0ebf1e2ac696eb7c9287787ac0311a5660a22cd2f3c095c2ab55db",
+      "protocol_fixture_pcap_sha256": "82c779ed1212d600794683226c15c7d7751fc06a1632163be7566adbbc49e2e7",
+      "field_schema_sha256": "217018bf7a167ab7d65ca9c019c088ae3783521071fc5196e20683997ed91a32"
+    }
+  ]
+}

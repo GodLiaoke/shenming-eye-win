@@ -1,0 +1,122 @@
+{
+  "heroes": [
+    {
+      "key": "astra",
+      "name": "Astra"
+    },
+    {
+      "key": "breach",
+      "name": "Breach"
+    },
+    {
+      "key": "brimstone",
+      "name": "Brimstone"
+    },
+    {
+      "key": "chamber",
+      "name": "Chamber"
+    },
+    {
+      "key": "clove",
+      "name": "Clove"
+    },
+    {
+      "key": "cypher",
+      "name": "Cypher"
+    },
+    {
+      "key": "deadlock",
+      "name": "Deadlock"
+    },
+    {
+      "key": "fade",
+      "name": "Fade"
+    },
+    {
+      "key": "gekko",
+      "name": "Gekko"
+    },
+    {
+      "key": "harbor",
+      "name": "Harbor"
+    },
+    {
+      "key": "iso",
+      "name": "Iso"
+    },
+    {
+      "key": "jett",
+      "name": "Jett"
+    },
+    {
+      "key": "kay-o",
+      "name": "KAY/O"
+    },
+    {
+      "key": "killjoy",
+      "name": "Killjoy"
+    },
+    {
+      "key": "miks",
+      "name": "Miks"
+    },
+    {
+      "key": "neon",
+      "name": "Neon"
+    },
+    {
+      "key": "omen",
+      "name": "Omen"
+    },
+    {
+      "key": "phoenix",
+      "name": "Phoenix"
+    },
+    {
+      "key": "raze",
+      "name": "Raze"
+    },
+    {
+      "key": "reyna",
+      "name": "Reyna"
+    },
+    {
+      "key": "sage",
+      "name": "Sage"
+    },
+    {
+      "key": "skye",
+      "name": "Skye"
+    },
+    {
+      "key": "sova",
+      "name": "Sova"
+    },
+    {
+      "key": "tejo",
+      "name": "Tejo"
+    },
+    {
+      "key": "veto",
+      "name": "Veto"
+    },
+    {
+      "key": "viper",
+      "name": "Viper"
+    },
+    {
+      "key": "vyse",
+      "name": "Vyse"
+    },
+    {
+      "key": "waylay",
+      "name": "Waylay"
+    },
+    {
+      "key": "yoru",
+      "name": "Yoru"
+    }
+  ],
+  "byId": {},
+  "ids": {}
+}

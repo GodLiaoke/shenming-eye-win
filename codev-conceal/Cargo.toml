@@ -1,0 +1,7 @@
+[package]
+name = "codev-conceal"
+version = "0.1.0"
+edition = "2024"
+description = "Runtime-decoded protocol tokens so release binaries do not store them as plaintext"
+license = "Proprietary"
+publish = false

@@ -1,0 +1,72 @@
+name: build-windows
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      # 静态 CRT：客户机器不需要装 VC++ 运行库
+      RUSTFLAGS: "-Ctarget-feature=+crt-static"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Toolchain
+        run: |
+          rustup show
+          rustc --version
+          cargo --version
+
+      - name: Build (release)
+        run: |
+          cargo build -p phoenix-windows --release
+
+      - name: Inspect exe
+        run: |
+          $exe = "target/release/Shenming-Eye.exe"
+          if (-not (Test-Path $exe)) { throw "找不到 $exe" }
+          Get-Item $exe | Select-Object Name, Length, LastWriteTime | Format-List
+
+      - name: Inject icon + version info
+        continue-on-error: true
+        run: |
+          New-Item -ItemType Directory -Force dist | Out-Null
+          python phoenix-windows/tools/pe_resource.py `
+            "target/release/Shenming-Eye.exe" `
+            --output "dist/Shenming-Eye.exe" `
+            --version 1.0.0 `
+            --build "shenming-1.0" `
+            --icon "phoenix-windows/tools/app.ico"
+
+      - name: Package
+        run: |
+          New-Item -ItemType Directory -Force dist | Out-Null
+          if (-not (Test-Path "dist/Shenming-Eye.exe")) {
+            Copy-Item "target/release/Shenming-Eye.exe" "dist/Shenming-Eye.exe" -Force
+          }
+          Copy-Item "phoenix-windows/third_party/windivert/WinDivert.dll" dist/ -ErrorAction SilentlyContinue
+          Copy-Item "phoenix-windows/third_party/windivert/WinDivert64.sys" dist/ -ErrorAction SilentlyContinue
+          Copy-Item "phoenix-windows/third_party/windivert/LICENSE.txt" "dist/WinDivert-LICENSE.txt" -ErrorAction SilentlyContinue
+          Copy-Item "phoenix-windows/使用教程-小白版.md" dist/ -ErrorAction SilentlyContinue
+          Get-ChildItem dist | Select-Object Name, Length | Format-Table -AutoSize
+          Compress-Archive -Path "dist/*" -DestinationPath "神明之眼-1.0-Windows.zip" -Force
+          Get-FileHash "神明之眼-1.0-Windows.zip" -Algorithm SHA256 | Format-List
+
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: shenming-eye-win
+          path: 神明之眼-1.0-Windows.zip
+          if-no-files-found: error
