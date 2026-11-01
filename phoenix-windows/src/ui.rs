@@ -67,10 +67,19 @@ pub(crate) fn run() -> anyhow::Result<()> {
         crate::app::gateway_origin().unwrap_or_else(|| "未设置".to_string())
     ));
     let device_id = load_or_create_device_id(&data_dir)?;
-    let (saved_state, load_error) = match load_state(&data_dir) {
+    let (saved_state, _load_error) = match load_state(&data_dir) {
         Ok(state) => (state, None),
         Err(_) => (None, Some("本机授权读取失败".to_string())),
     };
+    // 神明之眼 1.0：没有历史状态（首次运行 / 老状态解不开）也必须立刻起本机引擎。
+    // 卡密版这里会停在「等待有效授权」等用户输卡；去掉卡密后如果还照原样走，
+    // 事件循环就永远不会收到 ActivationFinished —— 界面会一直卡在
+    // 「正在启动安全服务…」。所以这里直接合成一份本机授权。
+    let saved_state = saved_state.or_else(|| Some(SavedState {
+        card: "SHENMING-LOCAL".to_string(),
+        grant: authorization::local_grant(),
+        local_password: local_password(&device_id),
+    }));
 
     let event_loop = EventLoopBuilder::<UserEvent>::with_user_event().build();
     let proxy = event_loop.create_proxy();
@@ -240,7 +249,7 @@ pub(crate) fn run() -> anyhow::Result<()> {
                         );
                     }
                     "open-captures" => {
-                        // 抓包目录：本机引擎每局都会写 capture.pcap，这里直接打开资源管理器。
+                        // 抓包目录：本机引擎每局都会写 proxy-*.pcap，这里直接打开资源管理器。
                         let dir = capture_dir(&data_dir);
                         let _ = fs::create_dir_all(&dir);
                         crate::app::open_url(&dir.to_string_lossy());
@@ -254,7 +263,8 @@ pub(crate) fn run() -> anyhow::Result<()> {
                         } else {
                             toast(sidebar.as_ref(), &text);
                         }
-                    }                    "open-browser" => {
+                    }
+                    "open-browser" => {
                         if let Some(saved) = state.as_ref() {
                             open_url(&radar_target(saved));
                         } else {
