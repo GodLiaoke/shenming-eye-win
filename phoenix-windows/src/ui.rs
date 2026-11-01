@@ -138,6 +138,7 @@ pub(crate) fn run() -> anyhow::Result<()> {
     let radar = WebViewBuilder::new_with_web_context(&mut web_context)
         .with_bounds(radar_bounds)
         .with_html(radar_placeholder())
+        .with_initialization_script(HERO_UNLOCK_JS)
         .with_background_color((10, 14, 20, 255))
         .with_clipboard(true)
         .build_as_child(&window)
@@ -422,6 +423,51 @@ pub(crate) fn run() -> anyhow::Result<()> {
     });
 }
 
+/// 雷达页的「英雄身份解锁」脚本（与 iOS 版同一条）。
+///
+/// 页面 `zt()` 里写死 `agent_id: "proven" === identity_confidence ? … : null`，
+/// 而引擎只在阵营 commit 后才把位置标 proven —— 敌人前几秒是 unresolved，
+/// 于是"有英雄编号也显示不出英雄/头像"。这里在页面脚本之前包一层 JSON.parse：
+/// 只给**已带 agent_id 的位置**置 proven，并把 `map_roster` 里的昵称补进帧。
+/// 坐标 / 阵营 / continuity 一律不动。
+const HERO_UNLOCK_JS: &str = r#"
+(function () {
+  var ROSTER = Object.create(null);
+  function remember(obj) {
+    if (!obj || obj.kind !== "map_roster") return;
+    var list = obj.payload && obj.payload.roster;
+    if (!Array.isArray(list)) return;
+    for (var i = 0; i < list.length; i++) {
+      var e = list[i];
+      if (!e) continue;
+      if (Number.isInteger(e.slot) && typeof e.display_name === "string" && e.display_name) {
+        ROSTER[e.slot] = e.display_name;
+      }
+    }
+  }
+  function unlock(obj) {
+    if (!obj || typeof obj !== "object") return;
+    if (obj.kind !== "position_delta" && obj.kind !== "snapshot") return;
+    var list = obj.payload && obj.payload.positions;
+    if (!Array.isArray(list)) return;
+    for (var i = 0; i < list.length; i++) {
+      var p = list[i];
+      if (!p || typeof p !== "object") continue;
+      if (typeof p.agent_id !== "number" || !(p.agent_id > 0)) continue;
+      var name = ROSTER[p.slot];
+      if (!p.display_name && name) p.display_name = name;
+      if (p.identity_confidence !== "proven") p.identity_confidence = "proven";
+    }
+  }
+  var original = JSON.parse;
+  if (typeof original !== "function") return;
+  window.JSON.parse = function (text, reviver) {
+    var value = original.call(this, text, reviver);
+    try { remember(value); unlock(value); } catch (ignore) {}
+    return value;
+  };
+})();
+"#;
 fn panel_auth_script(token: &str) -> String {
     // The local panel runs in token-gated public mode. Exchange the bootstrap
     // token for a session cookie inside the loaded panel origin, then reload so
