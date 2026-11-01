@@ -190,11 +190,7 @@ struct RuntimePaths {
 }
 
 impl LocalEngine {
-    /// 抓包目录：本机引擎按 `[record] proxy_pcap = true` 把每局对战写成
-/// `capture.pcap`（经典 PCAP，Wireshark 可直接打开），就落在这里。
-pub(crate) fn capture_dir(data_dir: &Path) -> std::path::PathBuf {
-    data_dir.join("local-engine").join("record")
-}
+
 pub(crate) fn start(data_dir: &Path) -> anyhow::Result<Self> {
         let paths = Self::runtime_paths(data_dir)?;
         Self::write_config(&paths)?;
@@ -487,4 +483,10 @@ fn toml_path(path: &Path) -> String {
     path.to_string_lossy()
         .replace('\\', "\\\\")
         .replace('"', "\\\"")
+}
+
+/// 抓包目录：本机引擎按 `[record] proxy_pcap = true` 把每局对战写成
+/// `proxy-<时间戳>-<pid>-<序号>.pcap`（经典 PCAP，Wireshark 可直接打开）。
+pub(crate) fn capture_dir(data_dir: &Path) -> std::path::PathBuf {
+    data_dir.join("local-engine").join("record")
 }
